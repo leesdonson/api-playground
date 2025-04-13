@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "./src/app.js",
   "scripts": {
-    "dev": "npx nodemon"
+    "dev": "npx nodemon",
+    "start": "node ./dist/app.js",
+    "migrate": "npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",
@@ -11,6 +13,7 @@
   "type": "commonjs",
   "description": "Playground API for learning purposes",
   "dependencies": {
+    "@prisma/client": "^6.6.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/jsonwebtoken": "^9.0.9",
@@ -20,6 +23,7 @@
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+    "prisma": "^6.6.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
