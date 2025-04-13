@@ -49,7 +49,7 @@ The first command allows us to install TypeScript and ts-node. `ts-node` allow u
 
 The next command will create a `tsconfig.json` file that describes the typescript configuration files.
 
-- Create nodemon.js  
+- Create nodemon.json  
   The is a simple file that will keep track of all your files and restart the server everytime it detects a change in a specified file location and also execute a file with a specific extension.
 
 ```json
@@ -78,3 +78,54 @@ Since we a writing TypeScript, we also need to install the types associated with
 ```
 
 **NOTE**: We don't need to install types for any package that are written in TypeScript. Its all included when we install it.
+
+Next in the package.json file, we need to add some scripts to run the application.
+
+```json
+{
+  "name": "playground-api",
+  "version": "1.0.0",
+  "main": "./src/app.js",
+  "scripts": {
+    "dev": "npx nodemon",
+    "start": "node ./dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "Playground API for learning purposes"
+}
+```
+
+Next, to test it out, inside the _**root**_ directory, create a new directory called **src**. Inside the src directory, create a create a `app.ts` and insert the foollowing code.
+
+```ts
+import express from "express";
+import cors from "cors";
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
+```
+
+Now it's time to run the server. Open the terminal or command prompt and run the script we specified in the package.json file.
+
+```shell
+npm run dev
+```
+
+On you console or terminal , you would expect to see
+
+```shell
+Server is running on port 3000
+```
