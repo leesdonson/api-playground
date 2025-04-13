@@ -49,8 +49,8 @@ The first command allows us to install TypeScript and ts-node. `ts-node` allow u
 
 The next command will create a `tsconfig.json` file that describes the typescript configuration files.
 
-- Create nodemon.js
-  The is a simple file that will keep track of you files and restart the server everytime it detects a change a change a in a specified file location and also exexute a file with a specific extension.
+- Create nodemon.js  
+  The is a simple file that will keep track of all your files and restart the server everytime it detects a change in a specified file location and also execute a file with a specific extension.
 
 ```json
 {
