@@ -1,131 +1,65 @@
-## TypeScript - Node API Setup
+# Playground API
 
-Building API using `TypeScript` makes your codebase more predictable and maintainable. It helps you to have confident on your app while building. Building a type-safe API makes it easy for maintain, scale hence makes developer's life more easier.
+This project is an **open-source** API for a social media post application. Everything you need for a backend implementations are done for you from Authentication to CRUD functionalities. You only have to build your own frontend to interact with the API. You can use any frontend frameworks/library your are comfortable working with.
 
-To initialize a new Nodejs-TypeScript project, there are couple of steps we need to do to fully have a functional dev environment.
+To read more on how to consume the API, please read the docs on this website [https://docs-playground-api.vercel.app]
 
-- Initialize a Nodejs project
+### Prerequisites
 
-```shell
-npm init -y
-```
+- _Nodejs_
+- _Expressjs_
+- _TypeScript_
+- _SQL_
+- _Prisma ORM_
 
-#### What happened?
+The API is build using **Nodejs** and **Expressjs** and it's written in **TypeScript**. It uses the **PostgreSQL** as the database with **Prisma ORM**.
 
-The command will create a `package.json` file in the root of your application with all default values.
+### How to Access
 
-```json
-{
-  "name": "playground-api",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "some test script"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "description": ""
-}
-```
-
-- Install Dependencies & Initialize TS Config  
-  Next it's time to install `typescript` and some related packages like `ts-node,`.
+To get started, on this repo, click on the `code` dropdown and copy the URL. Back in your local editor, open terminal/powershell and paste the URL after git clone.
 
 ```shell
-   npm i -D typescript ts-node
+git clone https://github.com/leesdonson/api-playground.git <api>
 ```
 
-After installation has completed, next we need to run another command to scafold the typescript config file.
+**Note** : Make sure to specify the directory which you want your backend code to be, in the place of **api**. If you are already in the directory, just put a dot (.) so it's going to clone it in the current repo/directory.
 
-```shell
-   tsc --init
-```
-
-### What happened?
-
-The first command allows us to install TypeScript and ts-node. `ts-node` allow us to run typescript directly without transpiling or converted it to JavaScript to execute the file.
-
-The next command will create a `tsconfig.json` file that describes the typescript configuration files.
-
-- Create nodemon.json  
-  The is a simple file that will keep track of all your files and restart the server everytime it detects a change in a specified file location and also execute a file with a specific extension.
-
-```json
-{
-  "watch": ["src"],
-  "ext": ".ts,.js",
-  "exec": "ts-node ./src/app.ts"
-}
-```
-
-### What happened?
-
-We explicitely tell it to watch the `src` directory that contains the file `extension .ts,.js` and run the file main `app.ts` file. That simply means any file whether inside the nested directory or regardless of where it located, so long as its inside the **src** directory, whenever you detects a change in file, re-run the _app.ts_.
-
-- Installing Dependencies  
-  At this point, the minimal setup we need to start developing our API is configured. Next we need to install the packages that we need to build API.
-
-```bash
-   npm i express jsonwebtoken cors dotenv
-```
-
-Since we a writing TypeScript, we also need to install the types associated with the package.
-
-```bash
-   npm i -D @types/express @types/jsonwebtoken @types/cors
-```
-
-**NOTE**: We don't need to install types for any package that are written in TypeScript. Its all included when we install it.
-
-Next in the package.json file, we need to add some scripts to run the application.
-
-```json
-{
-  "name": "playground-api",
-  "version": "1.0.0",
-  "main": "./src/app.js",
-  "scripts": {
-    "dev": "npx nodemon",
-    "start": "node ./dist/app.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "description": "Playground API for learning purposes"
-}
-```
-
-Next, to test it out, inside the _**root**_ directory, create a new directory called **src**. Inside the src directory, create a create a `app.ts` and insert the foollowing code.
-
-```ts
-import express from "express";
-import cors from "cors";
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
-```
-
-Now it's time to run the server. Open the terminal or command prompt and run the script we specified in the package.json file.
+After you successfully clone the repo, open terminal and navigate to api directory (if you use other directory name) and run the dev server.
 
 ```shell
 npm run dev
 ```
 
-On you console or terminal , you would expect to see
+### Endpoints
 
-```shell
-Server is running on port 3000
-```
+- Auth  
+  All authentication related endpoints;
+  - Sign In
+  - Sign Up
+  - Sign Out
+- Users  
+  All user related endpoints
+  - Profile
+  - Update Profile
+  - Delete profile
+- Posts  
+  All Posts related endpoints
+  - Add post
+  - Get single post
+  - Get all posts
+  - Edit post
+  - Delete post
+- Comments  
+  All comments related endpoints
+  - Add comment
+  - Get comments
+  - Edit comment
+  - Delete comment
+
+_Remember_:  
+ You are not limited to these, you can modify the code and build on that further. This is just the starting point.
+
+**Note**: For image uploads, I recommend you use Cloudinary as the storage. _Tip_: Before submitting data that requires image, make an async call to Cloudinary and await the call and then get the image url and send it to the backend to store the url in the db.
+
+Thank you  
+Happy coding!

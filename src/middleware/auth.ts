@@ -8,9 +8,13 @@ export const auth = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const token = req.cookies?.access_token;
+
       // if no token, do something
       if (!token) {
-        const error = new ErrorHandler("Not authorized", 401);
+        const error = new ErrorHandler(
+          "Access token not found. Not authorized",
+          401
+        );
         return next(error);
       }
       //decode the token

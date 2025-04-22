@@ -26,18 +26,14 @@ model User {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  title     String   @db.VarChar(255)
-  slug      String   @db.VarChar(255)
-  thumbnail String?  @db.VarChar(255)
-  content   String   @db.Text
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  userId String @map("user_id")
-  user   User   @relation(fields: [userId], references: [id])
-
-  comments Comment[]
+  id          String    @id @default(cuid())
+  thumbnail   String?   @db.VarChar(255)
+  description String?   @db.Text
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  userId      String    @map("user_id")
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments    Comment[]
 
   @@map("posts")
 }
@@ -47,9 +43,25 @@ model Comment {
   description String   @db.VarChar(255)
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
-
-  postId String @map("post_id")
-  post   Post   @relation(fields: [postId], references: [id])
+  like        Int?
+  commentBy   String   @map("comment_by") @db.VarChar(35)
+  postId      String   @map("post_id")
+  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  reply       Reply[]
 
   @@map("comments")
+}
+
+model Reply {
+  id          String   @id @default(cuid())
+  description String   @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  replyBy     String   @map("reply_by") @db.VarChar(35)
+  like        Int?
+
+  commentId String  @map("comment_id")
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@map("replies")
 }

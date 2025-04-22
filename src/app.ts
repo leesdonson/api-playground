@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.route";
 import userRouter from "./routes/user.route";
 import postRouter from "./routes/post.route";
@@ -11,7 +12,10 @@ import env from "./utils/env";
 const PORT = env.PORT;
 
 const app = express();
+// app.set("trust proxy", 1);
+// app.set("x-powered-by", false);
 
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 
@@ -35,7 +39,7 @@ process.on("uncaughtException", (err) => {
 });
 
 //undefined route
-app.all("*", (req: Request, res: Response, next: NextFunction) => {
+app.all("*all", (req: Request, res: Response, next: NextFunction) => {
   const err = new ErrorHandler(
     "Route not found. Invalid endpoint or wrong API version.",
     500

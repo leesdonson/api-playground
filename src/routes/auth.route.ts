@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { signIn, signOut, signUp } from "../controllers/auth.control";
+import { auth } from "../middleware/auth";
 
 const router = Router();
 
@@ -10,6 +11,6 @@ router.post("/sign-up", signUp);
 router.post("/sign-in", signIn);
 
 //signOut
-router.get("/sign-out", signOut);
+router.get("/sign-out", auth, signOut);
 
 export default router;

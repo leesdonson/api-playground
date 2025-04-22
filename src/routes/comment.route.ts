@@ -6,22 +6,23 @@ import {
   getComment,
   getComments,
 } from "../controllers/comment.control";
+import { auth } from "../middleware/auth";
 
 const router = Router();
 
 //add comment
-router.post("/add-comment", addComment);
+router.post("/add-comment", auth, addComment);
 
 //get all comments
-router.get("/", getComments);
+router.get("/", auth, getComments);
 
 //get comment details
-router.get("/comment/:id", getComment);
+router.get("/comment/:id", auth, getComment);
 
 //edit comment
-router.patch("/comment/:id", editComment);
+router.patch("/comment/:id", auth, editComment);
 
 //delete comment
-router.delete("/comment/:id", deleteComment);
+router.delete("/comment/:id", auth, deleteComment);
 
 export default router;

@@ -58,6 +58,7 @@ const signUp = asyncHandler(
 
     //send httpOnly token
     const token = generateToken(newUser.id);
+
     res.cookie("access_token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
