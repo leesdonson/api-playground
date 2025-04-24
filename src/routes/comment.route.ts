@@ -11,18 +11,18 @@ import { auth } from "../middleware/auth";
 const router = Router();
 
 //add comment
-router.post("/add-comment", auth, addComment);
+router.post("/add-comment/:postId", auth, addComment);
 
 //get all comments
-router.get("/", auth, getComments);
+router.get("/:postId", auth, getComments);
 
 //get comment details
-router.get("/comment/:id", auth, getComment);
+router.get("/comment/:postId", auth, getComment);
 
 //edit comment
-router.patch("/comment/:id", auth, editComment);
+router.patch("/comment/:postId/:id", auth, editComment);
 
 //delete comment
-router.delete("/comment/:id", auth, deleteComment);
+router.delete("/comment/:postId/:id", auth, deleteComment);
 
 export default router;

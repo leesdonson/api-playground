@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.route";
 import userRouter from "./routes/user.route";
 import postRouter from "./routes/post.route";
 import commentRouter from "./routes/comment.route";
+import replyRouter from "./routes/reply.route";
 import { errorHandler } from "./middleware/error";
 import ErrorHandler from "./utils/errorHandler";
 import env from "./utils/env";
@@ -12,12 +13,11 @@ import env from "./utils/env";
 const PORT = env.PORT;
 
 const app = express();
-// app.set("trust proxy", 1);
-// app.set("x-powered-by", false);
 
 app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -27,6 +27,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/comments", commentRouter);
+app.use("/api/v1/replies", replyRouter);
 
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
