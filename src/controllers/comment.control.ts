@@ -17,11 +17,21 @@ const addComment = asyncHandler(
       const error = new ErrorHandler("Post id is required.", 404);
       return next(error);
     }
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) {
+      const error = new ErrorHandler("Operation could not be completed.", 404);
+      return next(error);
+    }
 
     const comment = await prisma.comment.create({
       data: {
         description,
-        commentBy: id,
+        commentBy: user?.name,
         postId,
       },
     });
@@ -102,6 +112,9 @@ const getComments = asyncHandler(
     const comments = await prisma.comment.findMany({
       where: {
         postId: postId,
+      },
+      include: {
+        reply: true,
       },
       orderBy: {
         createdAt: "desc",

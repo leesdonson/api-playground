@@ -45,8 +45,8 @@ const signUp = asyncHandler(
     //create user
     const newUser = await prisma.user.create({
       data: {
-        name,
-        email,
+        name: name.toLowerCase(),
+        email: email.toLowerCase(),
         password: password ? hashedPassword : undefined,
       },
     });

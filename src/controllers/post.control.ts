@@ -150,6 +150,8 @@ const editPost = asyncHandler(
       return next(error);
     }
 
+    const like = parseInt(req.body.like);
+
     const updatedPost = await prisma.post.update({
       where: {
         id: id,
@@ -157,6 +159,7 @@ const editPost = asyncHandler(
       data: {
         description: req.body.description || post.description,
         thumbnail: req.body.thumbnail || post.thumbnail,
+        like: like || post.like,
       },
     });
 
