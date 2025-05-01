@@ -41,9 +41,6 @@ const createPost = asyncHandler(
     res.status(201).json({
       statusTxt: "success",
       message: "Post created successfully",
-      data: {
-        post,
-      },
     });
   }
 );
@@ -80,9 +77,7 @@ const getPosts = asyncHandler(
     res.status(200).json({
       statusTxt: "success",
       message: "Posts",
-      data: {
-        posts,
-      },
+      data: posts,
     });
   }
 );
@@ -119,9 +114,7 @@ const getPostDetails = asyncHandler(
     res.status(200).json({
       statusTxt: "success",
       message: "Post details",
-      data: {
-        post,
-      },
+      data: post,
     });
   }
 );
@@ -171,9 +164,7 @@ const editPost = asyncHandler(
     res.status(200).json({
       statusTxt: "success",
       message: "Post updated successfully",
-      data: {
-        post: updatedPost,
-      },
+      data: updatedPost,
     });
   }
 );

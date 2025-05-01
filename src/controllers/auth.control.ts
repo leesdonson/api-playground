@@ -111,14 +111,17 @@ const signIn = asyncHandler(
       return next(error);
     }
 
+    // console.log(user);
+
     //send httpOnly token
     const token = generateToken(user.id);
+    // console.log("GenToken: => ", token);
     res.cookie("access_token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NODE_ENV === "production" ? true : false,
       sameSite: "lax",
       maxAge: 15 * 60 * 1000,
-      expires: new Date(Date.now() + 900 * 60 * 1000),
+      // expires: new Date(Date.now() + 900 * 60 * 1000),
     });
 
     res.status(200).json({
