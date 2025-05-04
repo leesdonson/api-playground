@@ -47,14 +47,7 @@ const createPost = asyncHandler(
 
 const getPosts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.user?.id;
-
     const posts = await prisma.post.findMany({
-      where: {
-        user: {
-          id: userId,
-        },
-      },
       include: {
         user: {
           select: {
@@ -85,14 +78,10 @@ const getPosts = asyncHandler(
 const getPostDetails = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const postId = req.params.postId;
-    const userId = req.user?.id;
 
     const post = await prisma.post.findFirst({
       where: {
         id: postId,
-        user: {
-          id: userId,
-        },
       },
       include: {
         user: {
